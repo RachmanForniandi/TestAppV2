@@ -20,16 +20,18 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText etName;
-    EditText etEmail;
-    EditText etPassword;
-    Button   btnRegister;
+    @BindView(R.id.et_Name)EditText etName;
+    @BindView(R.id.et_Email)EditText etEmail;
+    @BindView(R.id.et_Password)EditText etPassword;
+    @BindView(R.id.btn_Register)Button   btnRegister;
     ProgressDialog loadingProgress;
 
     Context context;
@@ -40,17 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        ButterKnife.bind(this);
         context = this;
         apiBaseService = UtilsApi.getAPIService();
-        initComponents();
-    }
-
-    private void initComponents() {
-        etName = (EditText) findViewById(R.id.et_Name);
-        etEmail = (EditText) findViewById(R.id.et_Email);
-        etPassword= (EditText) findViewById(R.id.et_Password);
-        btnRegister = (Button) findViewById(R.id.btn_Register);
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

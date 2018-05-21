@@ -21,16 +21,19 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText etEmail;
-    EditText etPassword;
-    Button btnLogin;
-    TextView txtRegister;
+
+    @BindView(R.id.et_Email) EditText etEmail;
+    @BindView(R.id.et_Password)EditText etPassword;
+    @BindView(R.id.btn_Login)Button btnLogin;
+    @BindView(R.id.sign_up_order)TextView txtRegister;
     ProgressDialog loadingProgress;
 
     Context context;
@@ -40,17 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
+        ButterKnife.bind(this);
         context = this;
         apiBaseService = UtilsApi.getAPIService();
-        initComponents();
-    }
-
-    private void initComponents() {
-        etEmail = (EditText) findViewById(R.id.et_Email);
-        etPassword =(EditText)findViewById(R.id.et_Password);
-        btnLogin = (Button) findViewById(R.id.btn_Login);
-        txtRegister = (TextView)findViewById(R.id.sign_up_order);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void requestLogin() {
         apiBaseService.loginRequest(etEmail.getText().toString(), etPassword.getText().toString())
